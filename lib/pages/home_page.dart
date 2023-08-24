@@ -59,13 +59,13 @@ class HomePage extends StatelessWidget {
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.white,
-                                      blurRadius: 20,
-                                      offset: Offset(-10, -10)
+                                      blurRadius: 5,
+                                      offset: Offset(-3, -3)
                                   ),
                                   BoxShadow(
                                       color: grey,
-                                      blurRadius: 20,
-                                      offset: Offset(10, 10)
+                                      blurRadius: 5,
+                                      offset: Offset(3, 3)
                                   ),
                                 ]
                             ),
