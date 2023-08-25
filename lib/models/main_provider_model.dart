@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Data with ChangeNotifier{
+class MainProvider with ChangeNotifier {
 
   final PageController mainPageController = PageController(initialPage: 0);
   int activePage = 0;

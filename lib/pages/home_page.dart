@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Consumer<Data>(builder: (context, data, _){
+      body: Consumer<MainProvider>(builder: (context, data, _){
         return Stack(
           children: [
             PageView.builder(
