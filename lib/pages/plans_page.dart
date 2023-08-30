@@ -33,7 +33,7 @@ class PlansPage extends StatelessWidget {
               Expanded(
                   child: ListView.builder(
                       itemCount: data.tasks.length,
-                      controller: data.scrollController,
+                      controller: data.taskScrollController,
                       reverse: true,
                       shrinkWrap: true,
                       padding: const EdgeInsets.only(bottom: 100),

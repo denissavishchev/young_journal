@@ -7,7 +7,7 @@ class PlansProvider with ChangeNotifier {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _deadlineController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
-  ScrollController scrollController = ScrollController();
+  ScrollController taskScrollController = ScrollController();
 
   Future addTask(context) {
     return showModalBottomSheet(
@@ -62,8 +62,8 @@ class PlansProvider with ChangeNotifier {
                       ]);
                       Navigator.of(context).pop();
                       notifyListeners();
-                      scrollController.animateTo(
-                          scrollController.position.maxScrollExtent + 110,
+                      taskScrollController.animateTo(
+                          taskScrollController.position.maxScrollExtent + 110,
                           duration: const Duration(milliseconds: 10),
                           curve: Curves.linear);
                     },

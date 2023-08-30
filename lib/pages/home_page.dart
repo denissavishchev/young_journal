@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:young_journal/constants.dart';
-import 'package:young_journal/pages/pet_page.dart';
+import 'package:young_journal/pages/pets_page.dart';
 import 'package:young_journal/pages/plans_page.dart';
 import '../models/main_provider_model.dart';
 import 'custom_page.dart';
@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   final List _pages = [
     const FinancePage(),
     const PlansPage(),
-    const PetPage(),
+    const PetsPage(),
     const CustomPage(),
   ];
 
