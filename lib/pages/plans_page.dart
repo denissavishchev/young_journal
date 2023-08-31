@@ -13,7 +13,7 @@ class PlansPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: blue.withOpacity(0.3),
+      backgroundColor: kBlue.withOpacity(0.3),
       body: Consumer<PlansProvider>(
         builder: (context, data, _){
           return Column(
@@ -40,7 +40,7 @@ class PlansPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return BasicContainerWidget(
                           height: 0.1,
-                          color: green,
+                          color: kGreen,
                           child: ListTile(
                             title: Text(data.tasks[index][0]),
                             subtitle: Text(data.tasks[index][1]),

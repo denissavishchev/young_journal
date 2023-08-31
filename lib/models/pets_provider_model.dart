@@ -24,7 +24,7 @@ class PetsProvider with ChangeNotifier {
             height: MediaQuery.of(context).size.height,
             padding: const EdgeInsets.symmetric(vertical: 14),
             decoration: const BoxDecoration(
-                color: grey,
+                color: kGrey,
                 borderRadius: BorderRadius.all(Radius.circular(16))
             ),
             child: Column(
@@ -89,7 +89,7 @@ class PetsProvider with ChangeNotifier {
             height: MediaQuery.of(context).size.height,
             padding: const EdgeInsets.symmetric(vertical: 14),
             decoration: const BoxDecoration(
-                color: grey,
+                color: kGrey,
                 borderRadius: BorderRadius.all(Radius.circular(16))
             ),
             child: Column(

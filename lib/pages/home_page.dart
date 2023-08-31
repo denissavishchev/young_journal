@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             padding: EdgeInsets.all(data.activePage == index ? 3 : 18),
                             decoration: const BoxDecoration(
-                                color: grey,
+                                color: kGrey,
                                 borderRadius: BorderRadius.all(Radius.circular(16)),
                                 boxShadow: [
                                   BoxShadow(
@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
                                       offset: Offset(-3, -3)
                                   ),
                                   BoxShadow(
-                                      color: grey,
+                                      color: kGrey,
                                       blurRadius: 5,
                                       offset: Offset(3, 3)
                                   ),
@@ -74,16 +74,16 @@ class HomePage extends StatelessWidget {
                               padding: const EdgeInsets.all(16),
                               decoration: const BoxDecoration(
                                 boxShadow: [
-                                  BoxShadow(color: grey, blurRadius: 1, spreadRadius: 0),
+                                  BoxShadow(color: kGrey, blurRadius: 1, spreadRadius: 0),
                                   BoxShadow(color: Colors.white, blurRadius: 20, spreadRadius: 5),
                                 ],
                                 borderRadius: BorderRadius.all(Radius.circular(16)),
-                                color: grey,
+                                color: kGrey,
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                   colors: [
-                                    grey,
+                                    kGrey,
                                     Colors.white,
                                   ],
                                 ),

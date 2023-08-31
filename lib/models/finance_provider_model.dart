@@ -1,13 +1,21 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:young_journal/constants.dart';
 
 class FinanceProvider with ChangeNotifier {
 
   List finances = [];
+  final List<double> spots = [];
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amongController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   ScrollController scrollController = ScrollController();
+
+  List<FlSpot> spot(List spots) {
+    return spots.asMap().entries.map((e) {
+      return FlSpot(e.key.toDouble(), e.value);
+    }).toList();
+  }
 
   String totalFinances(){
     double total = 0.0;
@@ -27,7 +35,7 @@ class FinanceProvider with ChangeNotifier {
             height: MediaQuery.of(context).size.height,
             padding: const EdgeInsets.symmetric(vertical: 14),
             decoration: const BoxDecoration(
-                color: grey,
+                color: kGrey,
                 borderRadius: BorderRadius.all(Radius.circular(16))
             ),
             child: Column(
@@ -37,7 +45,7 @@ class FinanceProvider with ChangeNotifier {
                     Expanded(
                       child: TextField(
                         controller: _nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'From',
                         ),
@@ -46,9 +54,9 @@ class FinanceProvider with ChangeNotifier {
                     Expanded(
                       child: TextField(
                         controller: _amongController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Amoung',
+                          hintText: 'Among',
                         ),
                       ),
                     ),
@@ -56,7 +64,7 @@ class FinanceProvider with ChangeNotifier {
                 ),
                 TextField(
                   controller: _commentController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Comment',
                   ),
@@ -70,6 +78,11 @@ class FinanceProvider with ChangeNotifier {
                             : double.parse(_amongController.text),
                         _commentController.text
                       ]);
+                      spots.add(
+                          !action
+                          ? (double.parse(_amongController.text)) * -1
+                          : double.parse(_amongController.text)
+                      );
                       Navigator.of(context).pop();
                       notifyListeners();
                       scrollController.animateTo(
@@ -77,7 +90,7 @@ class FinanceProvider with ChangeNotifier {
                           duration: const Duration(milliseconds: 10),
                           curve: Curves.linear);
                     },
-                    child: Text('Add'))
+                    child: const Text('Add'))
               ],
             ),
           );

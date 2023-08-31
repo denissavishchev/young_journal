@@ -7,7 +7,7 @@ class CustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: green,
+      backgroundColor: kGreen,
       body: Center(
           child: Text('CustomPage')
       ),

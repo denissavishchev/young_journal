@@ -22,11 +22,11 @@ class BasicButtonWidget extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: const BoxDecoration(
-                  color: orange,
+                  color: kOrange,
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   boxShadow: [
                     BoxShadow(
-                      color: blue,
+                      color: kBlue,
                       blurRadius: 3,
                       spreadRadius: 1,
                       offset: Offset(1, 1),
