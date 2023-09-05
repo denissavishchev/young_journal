@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../constants.dart';
+import 'package:young_journal/widgets/glass_morph_widget.dart';
 
 class BasicButtonWidget extends StatelessWidget {
   const BasicButtonWidget({
@@ -19,20 +18,13 @@ class BasicButtonWidget extends StatelessWidget {
           return GestureDetector(
             onTap: onTap,
             child: Container(
-              width: 80,
-              height: 80,
+              width: 60,
+              height: 60,
               decoration: const BoxDecoration(
-                  color: kOrange,
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(16)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: kBlue,
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                      offset: Offset(1, 1),
-                    )
-                  ]),
-              child: Center(child: Text(text, style: TextStyle(fontSize: 42),)),
+                  ),
+              child: GlassMorphWidget(child: Text(text, style: const TextStyle(fontSize: 42),),)
             ),
           );
         });

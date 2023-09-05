@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../constants.dart';
 import '../models/finance_provider_model.dart';
-import '../widgets/basic_container_widget.dart';
-import '../widgets/painters/button_painter.dart';
-import '../widgets/painters/main_list_view_painter.dart';
 
 class CustomPage extends StatelessWidget {
   const CustomPage({Key? key}) : super(key: key);
@@ -33,71 +29,6 @@ class CustomPage extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.5,
                           color: Colors.transparent,
-                          child: CustomPaint(
-                            painter: MainListViewPainter(),
-                            child: ClipRRect(
-                              clipBehavior: Clip.hardEdge,
-                              child: ListView.builder(
-                                  itemCount: data.finances.length,
-                                  controller: data.scrollController,
-                                  reverse: true,
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.only(bottom: 100),
-                                  itemBuilder: (context, index) {
-                                    return BasicContainerWidget(
-                                      height: 0.1,
-                                      color: data.finances[index][1] < 0 ? kOrange : kGreen,
-                                      child: ListTile(
-                                        title: Text(data.finances[index][0]),
-                                        subtitle: Text(data.finances[index][1].toString()),
-                                        trailing: data.finances[index][2].toString() != ''
-                                            ? const Icon(Icons.message_rounded)
-                                            : const SizedBox.shrink(),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 80,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () => data.updateFinance(context, true),
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.symmetric(horizontal: 18),
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            color: Colors.transparent,
-                            child: CustomPaint(
-                              painter: ButtonPainter(),
-                              child: const Center(
-                                child: Text('+', style: TextStyle(fontSize: 32),),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 180,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () => data.updateFinance(context, false),
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.symmetric(horizontal: 18),
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            color: Colors.transparent,
-                            child: CustomPaint(
-                              painter: ButtonPainter(),
-                              child: const Center(
-                                child: Text('-', style: TextStyle(fontSize: 32),),
-                              ),
-                            ),
-                          ),
                         ),
                       ),
                       Positioned(

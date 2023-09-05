@@ -40,7 +40,6 @@ class PlansPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return BasicContainerWidget(
                           height: 0.1,
-                          color: kGreen,
                           child: ListTile(
                             title: Text(data.tasks[index][0]),
                             subtitle: Text(data.tasks[index][1]),

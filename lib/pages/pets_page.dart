@@ -68,7 +68,6 @@ class PetsPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return BasicContainerWidget(
                                     height: 0.1,
-                                    color: kOrange,
                                     child: ListTile(
                                       title: Text(data.tasks[index][0]),
                                       subtitle: Text(data.tasks[index][1]),
