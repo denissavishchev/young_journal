@@ -4,11 +4,17 @@ import 'package:young_journal/widgets/glass_morph_widget.dart';
 
 class BasicButtonWidget extends StatelessWidget {
   const BasicButtonWidget({
-    super.key, required this.onTap, required this.text,
+    super.key,
+    required this.onTap,
+    required this.text,
+    this.width = 60,
+    this.height = 60,
   });
 
   final Function() onTap;
   final String text;
+  final double width;
+  final double height;
 
 
   @override
@@ -18,13 +24,17 @@ class BasicButtonWidget extends StatelessWidget {
           return GestureDetector(
             onTap: onTap,
             child: Container(
-              width: 60,
-              height: 60,
+              width: width,
+              height: height,
               decoration: const BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
-              child: GlassMorphWidget(child: Text(text, style: const TextStyle(fontSize: 42),),)
+              child: GlassMorphWidget(
+                opacityL: 0.13,
+                opacityR: 0.05,
+                color: Colors.deepOrange,
+                child: Text(text, style: TextStyle(fontSize: 42, color: Colors.white.withOpacity(0.7)),),)
             ),
           );
         });

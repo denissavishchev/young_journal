@@ -9,4 +9,5 @@ class MainProvider with ChangeNotifier {
     activePage = index;
     notifyListeners();
   }
+
 }

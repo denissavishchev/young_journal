@@ -5,11 +5,17 @@ import 'package:flutter/material.dart';
 class GlassMorphWidget extends StatelessWidget {
   const GlassMorphWidget({Key? key,
     required this.child,
-    this.opacity = 0.13
+    this.opacity = 0.13,
+    this.opacityL = 0.13,
+    this.opacityR = 0.05,
+    required this.color
   }) : super(key: key);
 
   final Widget child;
   final double opacity;
+  final double opacityL;
+  final double opacityR;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +42,8 @@ class GlassMorphWidget extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withOpacity(0.4),
-                    Colors.white.withOpacity(0.15),
+                    color.withOpacity(opacityL),
+                    color.withOpacity(opacityR),
                   ]),
             ),
           ),

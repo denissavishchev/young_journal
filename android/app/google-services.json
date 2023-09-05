@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377870408134",
+    "project_id": "youngjournal-c59bb",
+    "storage_bucket": "youngjournal-c59bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377870408134:android:7202a932ae2e2f5ace7ac7",
+        "android_client_info": {
+          "package_name": "com.example.young_journal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377870408134-2a47q3ndl7atoahenqlu614rhhque9o3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSdE2OGM5ZlKcnc1JgE79J5GAwX8MXFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377870408134-2a47q3ndl7atoahenqlu614rhhque9o3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

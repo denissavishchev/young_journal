@@ -6,11 +6,13 @@ class BasicContainerWidget extends StatelessWidget {
   const BasicContainerWidget({super.key,
     required this.height,
     required this.child,
-    this.width = 1,});
+    this.width = 1,
+    this.color = Colors.deepOrange,});
 
   final double height;
   final double width;
   final Widget child;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,9 @@ class BasicContainerWidget extends StatelessWidget {
           color: Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
-      child: GlassMorphWidget(child: child,)
+      child: GlassMorphWidget(
+        color: color,
+        child: child,)
     );
   }
 }
