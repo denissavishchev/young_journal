@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:young_journal/models/login_provider_model.dart';
 import '../models/finance_provider_model.dart';
 import '../widgets/basic_button_widget.dart';
 import '../widgets/basic_container_widget.dart';
@@ -10,6 +12,8 @@ class FinancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final initData = Provider.of<FinanceProvider>(context, listen: false);
+    initData.totalFinances();
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Consumer<FinanceProvider>(
@@ -80,23 +84,38 @@ class FinancePage extends StatelessWidget {
                 ),
                 child: ScrollConfiguration(
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
-                  child: ListView.builder(
-                      itemCount: data.finances.length,
-                      controller: data.scrollController,
-                      reverse: true,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return BasicContainerWidget(
-                          height: 0.1,
-                          child: ListTile(
-                            title: Text(data.finances[index][0], style: const TextStyle(color: Colors.white),),
-                            subtitle: Text(data.finances[index][1].toString(), style: const TextStyle(color: Colors.white),),
-                            trailing: data.finances[index][2].toString() != ''
-                              ? const Icon(Icons.message_rounded)
-                              : const SizedBox.shrink(),
-                          ),
-                        );
-                      }),
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection(prefs.getString('email')!)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return ListView.builder(
+                          itemCount: snapshot.data?.docs.length,
+                          controller: data.scrollController,
+                          reverse: true,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            data.finances.clear();
+                            snapshot.data?.docs.forEach((element) {
+                              data.finances.add(element['among']);
+                            });
+
+                            return BasicContainerWidget(
+                              height: 0.1,
+                              child: ListTile(
+                                title: Text(snapshot.data?.docs[index].get('from'), style: const TextStyle(color: Colors.white),),
+                                subtitle: Text((snapshot.data?.docs[index].get('among')).toString(), style: const TextStyle(color: Colors.white),),
+                                trailing: (snapshot.data?.docs[index].get('comment')).toString() != ''
+                                    ? const Icon(Icons.message_rounded)
+                                    : const SizedBox.shrink(),
+                              ),
+                            );
+                          });
+                    },
+                  )
                 ),
               ),
             ],

@@ -1,13 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:young_journal/models/login_provider_model.dart';
+import 'package:young_journal/models/reg_provider_model.dart';
 import 'package:young_journal/widgets/basic_button_widget.dart';
 import 'package:young_journal/widgets/basic_container_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class KidRegPage extends StatelessWidget {
+  const KidRegPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +14,12 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
-      body: Consumer<LoginProvider>(
+      body: Consumer<RegProvider>(
         builder: (context, data, _){
           return Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/bg04.png'), fit: BoxFit.cover
+                    image: AssetImage('assets/images/bg05.png'), fit: BoxFit.cover
                 )
             ),
             child: BackdropFilter(
@@ -35,7 +34,7 @@ class LoginPage extends StatelessWidget {
                     Container(
                       clipBehavior: Clip.hardEdge,
                       width: size.width * 0.9,
-                      height: size.height * 0.3,
+                      height: size.height * 0.4,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: const BorderRadius.all(Radius.circular(24)),
@@ -55,21 +54,22 @@ class LoginPage extends StatelessWidget {
                         children: [
                           BasicContainerWidget(
                             color: const Color(0xfff0c081),
-                              height: 0.1,
-                              child: TextField(
-                                controller: data.eMailController,
-                                cursorColor: Colors.white,
-                                style: const TextStyle(fontSize: 28, color: Colors.white),
-                                decoration: const InputDecoration(
-                                    isCollapsed: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent)
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent)
-                                    )
-                                ),
-                              ),),
+                            height: 0.1,
+                            child: TextField(
+                              controller: data.eMailController,
+                              cursorColor: Colors.white,
+                              style: const TextStyle(fontSize: 28, color: Colors.white),
+                              decoration: const InputDecoration(
+                                  hintText: 'Mail',
+                                  isCollapsed: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.transparent)
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.transparent)
+                                  )
+                              ),
+                            ),),
                           BasicContainerWidget(
                             color: const Color(0xfff0c081),
                             height: 0.1,
@@ -79,7 +79,27 @@ class LoginPage extends StatelessWidget {
                               cursorColor: Colors.white,
                               style: const TextStyle(fontSize: 28, color: Colors.white),
                               decoration: const InputDecoration(
+                                  hintText: 'Password',
                                   isCollapsed: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.transparent)
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.transparent)
+                                  )
+                              ),
+                            ),),
+                          BasicContainerWidget(
+                            color: const Color(0xfff0c081),
+                            height: 0.1,
+                            child: TextField(
+                              obscureText: true,
+                              controller: data.confirmPasswordController,
+                              cursorColor: Colors.white,
+                              style: const TextStyle(fontSize: 28, color: Colors.white),
+                              decoration: const InputDecoration(
+                                  isCollapsed: true,
+                                  hintText: 'Confirm Password',
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: Colors.transparent)
                                   ),
@@ -93,13 +113,10 @@ class LoginPage extends StatelessWidget {
                     ),
                     SizedBox(height: size.height * 0.1,),
                     BasicButtonWidget(
-                      width: size.width * 0.9,
-                        onTap: () => data.signIn(),
-                        text: 'Sign in'),
-                    SizedBox(height: size.height * 0.05,),
-                    TextButton(
-                        onPressed: () => data.elderOrKid(context),
-                        child: Text('Register', style: TextStyle(color: Colors.white, fontSize: 34),)),
+                        width: size.width * 0.9,
+                        onTap: () => data.register(),
+                        text: 'Register'),
+
                   ],
                 ),
               ),

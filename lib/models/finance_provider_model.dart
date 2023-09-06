@@ -1,28 +1,34 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:young_journal/constants.dart';
+import 'package:young_journal/models/login_provider_model.dart';
+import 'package:young_journal/pages/home_page.dart';
 
 class FinanceProvider with ChangeNotifier {
 
   List finances = [];
-  final List<double> spots = [];
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amongController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
-  List<FlSpot> spot(List spots) {
-    return spots.asMap().entries.map((e) {
-      return FlSpot(e.key.toDouble(), e.value);
-    }).toList();
+  String totalFinances() {
+    double total = 0.0;
+    for (int i = 0; i < finances.length; i++) {
+      total += finances[i];
+    }
+    print('sum ${finances}');
+    print('sum1 ${total}');
+    return total.toStringAsFixed(2);
   }
 
-  String totalFinances(){
-    double total = 0.0;
-    for(int i = 0; i < finances.length; i++){
-      total += finances[i][1];
-    }
-    return total.toStringAsFixed(2);
+  Future addToBase(String from, double among, String comment) async {
+    var email = prefs.getString('email');
+    print('email123 $email');
+    await FirebaseFirestore.instance
+        .collection(prefs.getString('email')!)
+        .doc((DateTime.now().millisecondsSinceEpoch).toString())
+        .set({'from': from, 'among': among, 'comment': comment});
   }
 
   Future updateFinance(context, bool action) {
@@ -36,8 +42,7 @@ class FinanceProvider with ChangeNotifier {
             padding: const EdgeInsets.symmetric(vertical: 14),
             decoration: const BoxDecoration(
                 color: kGrey,
-                borderRadius: BorderRadius.all(Radius.circular(16))
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(16))),
             child: Column(
               children: [
                 Row(
@@ -70,21 +75,18 @@ class FinanceProvider with ChangeNotifier {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: (){
-                      finances.add([
-                        _nameController.text,
-                        !action
-                            ? (double.parse(_amongController.text)) * -1
-                            : double.parse(_amongController.text),
-                        _commentController.text
-                      ]);
-                      spots.add(
+                    onPressed: () {
+                      addToBase(
+                          _nameController.text.trim(),
                           !action
-                          ? (double.parse(_amongController.text)) * -1
-                          : double.parse(_amongController.text)
-                      );
-                      Navigator.of(context).pop();
+                              ? (double.parse(_amongController.text)) * -1
+                              : double.parse(_amongController.text),
+                          _commentController.text.trim());
                       notifyListeners();
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()));
                       scrollController.animateTo(
                           scrollController.position.maxScrollExtent + 110,
                           duration: const Duration(milliseconds: 10),
@@ -96,5 +98,4 @@ class FinanceProvider with ChangeNotifier {
           );
         });
   }
-
 }

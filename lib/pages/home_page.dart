@@ -2,24 +2,12 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:young_journal/pages/pets_page.dart';
-import 'package:young_journal/pages/plans_page.dart';
 import 'package:young_journal/widgets/glass_morph_widget.dart';
-import '../models/main_provider_model.dart';
-import 'custom_page.dart';
-import 'finance_page.dart';
+import '../models/home_provider_model.dart';
+
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  
-  final List _pages = [
-    const FinancePage(),
-    const PlansPage(),
-    const PetsPage(),
-    const CustomPage(),
-  ];
-
-  final List _icons = ['hand', 'task', 'pet', 'serves'];
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +30,9 @@ class HomePage extends StatelessWidget {
                 PageView.builder(
                     controller: data.mainPageController,
                     onPageChanged: (int index) => data.changePage(index),
-                    itemCount: _pages.length,
+                    itemCount: data.pages.length,
                     itemBuilder: (context, index) {
-                      return _pages[index % _pages.length];
+                      return data.pages[index % data.pages.length];
                     }),
                 Positioned(
                   bottom: 20,
@@ -53,7 +41,7 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: List.generate(
-                        _pages.length, (index) =>
+                        data.pages.length, (index) =>
                           GestureDetector(
                             onTap: (){
                               data.mainPageController.animateToPage(
@@ -75,7 +63,7 @@ class HomePage extends StatelessWidget {
                                   opacityR: 0.15,
                                   child: Padding(
                                     padding: const EdgeInsets.all(12),
-                                      child: Image.asset('assets/images/${_icons[index]}.png')),)
+                                      child: Image.asset('assets/images/${data.icons[index]}.png')),)
                             ),
                           ),
                       ),
