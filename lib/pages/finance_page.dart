@@ -12,8 +12,7 @@ class FinancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final initData = Provider.of<FinanceProvider>(context, listen: false);
-    initData.totalFinances();
+    // final initData = Provider.of<FinanceProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Consumer<FinanceProvider>(
@@ -86,7 +85,7 @@ class FinancePage extends StatelessWidget {
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
-                        .collection(prefs.getString('email')!)
+                        .collection(email!)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
@@ -100,14 +99,14 @@ class FinancePage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             data.finances.clear();
                             snapshot.data?.docs.forEach((element) {
-                              data.finances.add(element['among']);
+                              data.finances.add(element['amount']);
                             });
 
                             return BasicContainerWidget(
                               height: 0.1,
                               child: ListTile(
                                 title: Text(snapshot.data?.docs[index].get('from'), style: const TextStyle(color: Colors.white),),
-                                subtitle: Text((snapshot.data?.docs[index].get('among')).toString(), style: const TextStyle(color: Colors.white),),
+                                subtitle: Text((snapshot.data?.docs[index].get('amount')).toString(), style: const TextStyle(color: Colors.white),),
                                 trailing: (snapshot.data?.docs[index].get('comment')).toString() != ''
                                     ? const Icon(Icons.message_rounded)
                                     : const SizedBox.shrink(),

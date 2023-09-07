@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:young_journal/constants.dart';
-import 'package:young_journal/models/login_provider_model.dart';
-import 'package:young_journal/pages/home_page.dart';
 
 class FinanceProvider with ChangeNotifier {
 
   List finances = [];
+  double totalAmount = 0.0;
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _amongController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
@@ -17,18 +17,21 @@ class FinanceProvider with ChangeNotifier {
     for (int i = 0; i < finances.length; i++) {
       total += finances[i];
     }
+    totalAmount = total;
+    print('totalAmount $totalAmount');
     print('sum ${finances}');
     print('sum1 ${total}');
     return total.toStringAsFixed(2);
   }
 
-  Future addToBase(String from, double among, String comment) async {
+  Future addToBase(String from, double amount, String comment) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email');
     print('email123 $email');
     await FirebaseFirestore.instance
         .collection(prefs.getString('email')!)
         .doc((DateTime.now().millisecondsSinceEpoch).toString())
-        .set({'from': from, 'among': among, 'comment': comment});
+        .set({'from': from, 'amount': amount, 'comment': comment});
   }
 
   Future updateFinance(context, bool action) {
@@ -58,10 +61,10 @@ class FinanceProvider with ChangeNotifier {
                     ),
                     Expanded(
                       child: TextField(
-                        controller: _amongController,
+                        controller: _amountController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Among',
+                          hintText: 'amount',
                         ),
                       ),
                     ),
@@ -75,22 +78,24 @@ class FinanceProvider with ChangeNotifier {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async{
                       addToBase(
                           _nameController.text.trim(),
                           !action
-                              ? (double.parse(_amongController.text)) * -1
-                              : double.parse(_amongController.text),
+                              ? (double.parse(_amountController.text)) * -1
+                              : double.parse(_amountController.text),
                           _commentController.text.trim());
                       notifyListeners();
                       Navigator.of(context).pop();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomePage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(builder: (context) => HomePage()));
                       scrollController.animateTo(
                           scrollController.position.maxScrollExtent + 110,
                           duration: const Duration(milliseconds: 10),
                           curve: Curves.linear);
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setDouble('amount', totalAmount);
                     },
                     child: const Text('Add'))
               ],
