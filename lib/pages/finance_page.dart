@@ -12,7 +12,10 @@ class FinancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // final initData = Provider.of<FinanceProvider>(context, listen: false);
+    Future.delayed(const Duration(seconds: 3), () {
+      final initData = Provider.of<FinanceProvider>(context, listen: false);
+      initData.totalFinances();
+    });
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Consumer<FinanceProvider>(
@@ -101,7 +104,6 @@ class FinancePage extends StatelessWidget {
                             snapshot.data?.docs.forEach((element) {
                               data.finances.add(element['amount']);
                             });
-
                             return BasicContainerWidget(
                               height: 0.1,
                               child: ListTile(

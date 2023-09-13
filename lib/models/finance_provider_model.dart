@@ -15,9 +15,10 @@ class FinanceProvider with ChangeNotifier {
   String totalFinances() {
     double total = 0.0;
     for (int i = 0; i < finances.length; i++) {
-      total += finances[i];
+      total = total += finances[i];
     }
     totalAmount = total;
+    notifyListeners();
     print('totalAmount $totalAmount');
     print('sum ${finances}');
     print('sum1 ${total}');
