@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:young_journal/constants.dart';
 import 'package:young_journal/widgets/glass_morph_widget.dart';
 
 class BasicButtonWidget extends StatelessWidget {
@@ -27,13 +28,12 @@ class BasicButtonWidget extends StatelessWidget {
               width: width,
               height: height,
               decoration: const BoxDecoration(
-                  color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
               child: GlassMorphWidget(
                 opacityL: 0.13,
                 opacityR: 0.05,
-                color: Colors.deepOrange,
+                color: kOrange,
                 child: Text(text, style: TextStyle(fontSize: 42, color: Colors.white.withOpacity(0.7)),),)
             ),
           );

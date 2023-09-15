@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
         return Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg02.png'), fit: BoxFit.cover
+              image: AssetImage('assets/images/bg08.png'), fit: BoxFit.cover
             )
           ),
           child: BackdropFilter(

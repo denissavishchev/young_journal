@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:young_journal/constants.dart';
 import '../models/home_provider_model.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
@@ -15,6 +16,8 @@ class BottomNavBarWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.5),
+              border: const Border.symmetric(
+                  horizontal: BorderSide(width: 0.4, color: kOrange)),
               boxShadow: [
                 BoxShadow(
                     color: Colors.black.withOpacity(0.5),
@@ -56,30 +59,30 @@ class BottomNavBarWidget extends StatelessWidget {
                           height: 48,
                           decoration: BoxDecoration(
                             color: const Color(0xff91918f),
-                            border: Border.all(color: Colors.grey, width: 0.5),
+                            border: Border.all(
+                                color: data.activePage == index
+                                    ? kOrange
+                                    : Colors.grey,
+                                width: 0.5),
                             borderRadius: const BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black,
                                 // spreadRadius: 2,
                                 blurRadius: 3,
-                                offset: data.activePage == index
-                                    ? const Offset(0, 0)
-                                    : const Offset(0, 2)
+                                offset: Offset(0, 2)
                               ),
                               BoxShadow(
-                                  color: const Color(0xff5e5e5c),
+                                  color: Color(0xff5e5e5c),
                                   // spreadRadius: 2,
                                   blurRadius: 1,
-                                  offset: data.activePage == index
-                                    ? const Offset(0, 0)
-                                    : const Offset(0, -1)
+                                  offset: Offset(0, -1)
                               ),
                             ]
                           ),
                           child: Icon(data.icon[index],
                             color: data.activePage == index
-                                ? Colors.white
+                                ? kOrange.withOpacity(0.7)
                                 : const Color(0xffd9d9d7),
                             size: 30,),
                         ),
@@ -94,53 +97,3 @@ class BottomNavBarWidget extends StatelessWidget {
     );
   }
 }
-
-
-// class BottomNavBarWidget extends StatelessWidget {
-//   const BottomNavBarWidget({
-//     super.key,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Positioned(
-//       bottom: 20,
-//       child: Consumer<MainProvider>(builder: (context, data, _){
-//         return SizedBox(
-//           width: MediaQuery.of(context).size.width,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: List.generate(
-//               data.pages.length, (index) =>
-//                 GestureDetector(
-//                   onTap: (){
-//                     data.mainPageController.animateToPage(
-//                         index,
-//                         duration: const Duration(milliseconds: 300),
-//                         curve: Curves.easeIn);
-//                   },
-//                   child: Container(
-//                       width: 60,
-//                       height: 60,
-//                       decoration: const BoxDecoration(
-//                         color: Colors.transparent,
-//                         borderRadius: BorderRadius.all(Radius.circular(16)),
-//                       ),
-//                       child: GlassMorphWidget(
-//                         opacity: data.activePage == index ? 0.8 : 0.13,
-//                         color: Colors.white,
-//                         opacityL: 0.5,
-//                         opacityR: 0.15,
-//                         child: Padding(
-//                             padding: const EdgeInsets.all(12),
-//                             child: Image.asset('assets/images/${data.icons[index]}.png')),)
-//                   ),
-//                 ),
-//             ),
-//           ),
-//         );
-//       }
-//       ),
-//     );
-//   }
-// }

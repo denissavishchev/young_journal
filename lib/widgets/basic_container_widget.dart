@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:young_journal/constants.dart';
 import 'package:young_journal/widgets/glass_morph_widget.dart';
 
 
@@ -7,7 +8,7 @@ class BasicContainerWidget extends StatelessWidget {
     required this.height,
     required this.child,
     this.width = 1,
-    this.color = Colors.deepOrange,});
+    this.color = kOrange,});
 
   final double height;
   final double width;

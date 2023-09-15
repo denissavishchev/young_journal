@@ -5,25 +5,10 @@ import 'package:young_journal/constants.dart';
 
 class FinanceProvider with ChangeNotifier {
 
-  List finances = [];
-  double totalAmount = 0.0;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   ScrollController scrollController = ScrollController();
-
-  String totalFinances() {
-    double total = 0.0;
-    for (int i = 0; i < finances.length; i++) {
-      total = total += finances[i];
-    }
-    totalAmount = total;
-    notifyListeners();
-    print('totalAmount $totalAmount');
-    print('sum ${finances}');
-    print('sum1 ${total}');
-    return total.toStringAsFixed(2);
-  }
 
   Future addToBase(String from, double amount, String comment) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -35,7 +20,7 @@ class FinanceProvider with ChangeNotifier {
         .set({'from': from, 'amount': amount, 'comment': comment});
   }
 
-  Future updateFinance(context, bool action) {
+  Future addTask(context) {
     return showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -82,21 +67,14 @@ class FinanceProvider with ChangeNotifier {
                     onPressed: () async{
                       addToBase(
                           _nameController.text.trim(),
-                          !action
-                              ? (double.parse(_amountController.text)) * -1
-                              : double.parse(_amountController.text),
+                          double.parse(_amountController.text),
                           _commentController.text.trim());
                       notifyListeners();
                       Navigator.of(context).pop();
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => HomePage()));
                       scrollController.animateTo(
                           scrollController.position.maxScrollExtent + 110,
                           duration: const Duration(milliseconds: 10),
                           curve: Curves.linear);
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setDouble('amount', totalAmount);
                     },
                     child: const Text('Add'))
               ],

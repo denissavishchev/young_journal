@@ -16,9 +16,9 @@ class MainProvider with ChangeNotifier {
   final List icons = ['hand', 'task', 'pet', 'serves'];
 
   final List icon = [
-    Icons.watch_later_outlined,
-    Icons.cloud_queue_sharp,
-    Icons.lightbulb,
+    Icons.self_improvement,
+    Icons.supervisor_account,
+    Icons.playlist_add_check,
     Icons.settings,];
 
   final PageController mainPageController = PageController(initialPage: 0);
