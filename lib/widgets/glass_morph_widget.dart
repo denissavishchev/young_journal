@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class GlassMorphWidget extends StatelessWidget {
   const GlassMorphWidget({Key? key,
     required this.child,
-    this.opacity = 0.13,
-    this.opacityL = 0.13,
-    this.opacityR = 0.05,
+    this.opacity = 0.4,
+    this.opacityL = 0.23,
+    this.opacityR = 0.15,
     required this.color
   }) : super(key: key);
 

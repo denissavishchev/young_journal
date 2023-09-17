@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart';
 import '../pages/custom_page.dart';
-import '../pages/finance_page.dart';
+import '../pages/kid_task_page.dart';
 import '../pages/pets_page.dart';
 import '../pages/plans_page.dart';
 
 class MainProvider with ChangeNotifier {
 
   final List pages = [
-    const FinancePage(),
+    const KidTaskPage(),
     const PlansPage(),
     const PetsPage(),
     const CustomPage(),
@@ -27,6 +29,11 @@ class MainProvider with ChangeNotifier {
   void changePage(int index) {
     activePage = index;
     notifyListeners();
+  }
+
+  void initPage() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = prefs.getString('email')!;
   }
 
 }

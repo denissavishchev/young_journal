@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:young_journal/models/login_provider_model.dart';
 import 'package:young_journal/widgets/basic_button_widget.dart';
 import 'package:young_journal/widgets/basic_container_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

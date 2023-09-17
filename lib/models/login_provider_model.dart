@@ -4,8 +4,7 @@ import 'package:young_journal/pages/auth/kid_reg_page.dart';
 import 'package:young_journal/widgets/basic_button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
-
-late String? email;
+import '../main.dart';
 
 class LoginProvider with ChangeNotifier {
 
@@ -19,7 +18,7 @@ class LoginProvider with ChangeNotifier {
     );
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('email', eMailController.text.trim());
-    email = prefs.getString('email');
+    email = prefs.getString('email')!;
   }
 
   Future elderOrKid(context) {

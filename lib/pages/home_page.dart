@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/home_provider_model.dart';
 import '../widgets/bottom_nav_bar_widget.dart';
 
@@ -11,6 +12,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final initData = Provider.of<MainProvider>(context, listen: false);
+    initData.initPage();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Consumer<MainProvider>(builder: (context, data, _){
@@ -39,7 +42,11 @@ class HomePage extends StatelessWidget {
                     top: 10,
                     right: 10,
                     child: IconButton(
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () async {
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.remove('email');
+                        FirebaseAuth.instance.signOut();
+                      } ,
                       icon: const Icon(Icons.logout, color: Colors.white,),
                     )),
               ],

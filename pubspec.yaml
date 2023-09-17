@@ -41,6 +41,8 @@ dependencies:
   firebase_core: ^2.15.1
   shared_preferences: ^2.2.1
   cloud_firestore: ^4.9.1
+  flutter_rounded_date_picker: ^3.0.4
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
