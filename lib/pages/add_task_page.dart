@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:young_journal/pages/home_page.dart';
 import 'package:young_journal/widgets/fade_container_widget.dart';
 import '../constants.dart';
+import '../functions.dart';
 import '../models/kid_provider_model.dart';
 import '../widgets/side_button_widget.dart';
 
@@ -53,7 +54,7 @@ class AddTaskPage extends StatelessWidget {
                             children: [
                               const Spacer(),
                               Text(
-                                data.format.format(data.dateTime ?? data.initialDate),
+                                format.format(data.dateTime ?? data.initialDate),
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 24,

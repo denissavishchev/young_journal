@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:young_journal/constants.dart';
+import 'package:young_journal/functions.dart';
 import 'package:young_journal/widgets/fade_container_widget.dart';
 import 'package:young_journal/widgets/side_button_widget.dart';
 import '../main.dart';
@@ -25,17 +26,9 @@ class KidTaskPage extends StatelessWidget {
               FadeContainerWidget(
                   child: Row(
                     children: [
-                      const SizedBox(width: 40,),
-                      IconButton(
-                          onPressed: (){},
-                          icon: const Icon(Icons.arrow_back_ios, color: Colors.white,)),
-                      const SizedBox(width: 10,),
-                      Text(data.format.format(data.dateTime ?? data.initialDate),
+                      const Spacer(),
+                      Text(convertTime(data.initialDate.millisecondsSinceEpoch),
                         style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
-                      const SizedBox(width: 10,),
-                      IconButton(
-                          onPressed: (){},
-                          icon: const Icon(Icons.arrow_forward_ios, color: Colors.white,)),
                       const Spacer(),
                       SideButtonWidget(
                         right: false,
@@ -73,7 +66,7 @@ class KidTaskPage extends StatelessWidget {
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection(email)
-                          .orderBy('time', descending: true)
+                          .orderBy('time', descending: false)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
@@ -88,13 +81,45 @@ class KidTaskPage extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return BasicContainerWidget(
                                 height: 0.1,
-                                child: ListTile(
-                                  title: Text(snapshot.data!.docs[index].get('time').toString(),
-                                    style: const TextStyle(color: Colors.white),),
-                                  subtitle: Text((snapshot.data?.docs[index].get('title')).toString(), style: const TextStyle(color: Colors.white),),
-                                  trailing: (snapshot.data?.docs[index].get('comment')).toString() != ''
-                                      ? const Icon(Icons.message_rounded)
-                                      : const SizedBox.shrink(),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: SizedBox(
+                                          width: 100,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text((snapshot.data?.docs[index].get('title')).toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(color: Colors.white,fontSize: 20),),
+                                              Text(convertTime(snapshot.data!.docs[index].get('time',)),
+                                                style: TextStyle(color:
+                                                convertTime(snapshot.data!.docs[index].get('time',))
+                                                    == convertTime(data.initialDate.millisecondsSinceEpoch)
+                                                ? kOrange
+                                                : Colors.white,
+                                                    fontSize: 18),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      VerticalDivider(thickness: 2, color: kOrange.withOpacity(0.3),),
+                                      Align(
+                                        alignment: Alignment.topCenter,
+                                        child: SizedBox(
+                                          width: 180,
+                                          height: 60,
+                                          child: SingleChildScrollView(
+                                            child: Text(snapshot.data!.docs[index].get('comment',),
+                                              style: const TextStyle(color: Colors.white, fontSize: 16),),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },

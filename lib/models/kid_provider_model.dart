@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:young_journal/constants.dart';
 
 class KidProvider with ChangeNotifier {
 
@@ -11,7 +11,6 @@ class KidProvider with ChangeNotifier {
   ScrollController scrollController = ScrollController();
   DateTime initialDate = DateTime.now();
   DateTime? dateTime = DateTime.now();
-  var format = DateFormat('d-MM-yyyy');
 
   Future addToBase(int time, String title, String comment) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,6 +27,25 @@ class KidProvider with ChangeNotifier {
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
       borderRadius: 16,
+      imageHeader: const AssetImage('assets/images/bg09.png'),
+        styleYearPicker: MaterialRoundedYearPickerStyle(
+          textStyleYear: TextStyle(fontSize: 40, color: Colors.white.withOpacity(0.6)),
+          textStyleYearSelected:
+          const TextStyle(fontSize: 56, color: Colors.white, fontWeight: FontWeight.bold),
+          heightYearRow: 100,
+          backgroundPicker: Colors.grey,
+        ),
+      styleDatePicker: MaterialRoundedDatePickerStyle(
+        textStyleYearButton: const TextStyle(color: Colors.white, fontSize: 26),
+        textStyleDayButton: const TextStyle(color: Colors.white, fontSize: 30),
+        textStyleCurrentDayOnCalendar: const TextStyle(color: kOrange),
+          textStyleButtonPositive: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.bold),
+          textStyleButtonNegative: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.6)),
+        backgroundActionBar: kOrange.withOpacity(0.2),
+        backgroundPicker: Colors.grey.withOpacity(0.7),
+        backgroundHeader: kOrange.withOpacity(0.5),
+        decorationDateSelected: BoxDecoration(color: kOrange.withOpacity(0.7), shape: BoxShape.circle)
+      )
     );
     notifyListeners();
   }
