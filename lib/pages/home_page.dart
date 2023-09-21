@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:young_journal/pages/auth/auth_page.dart';
 import '../models/home_provider_model.dart';
 import '../widgets/bottom_nav_bar_widget.dart';
 
@@ -45,7 +46,10 @@ class HomePage extends StatelessWidget {
                       onPressed: () async {
                         SharedPreferences prefs = await SharedPreferences.getInstance();
                         prefs.remove('email');
-                        FirebaseAuth.instance.signOut();
+                        FirebaseAuth.instance.signOut().then((value) =>
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const AuthPage())));
                       } ,
                       icon: const Icon(Icons.logout, color: Colors.white,),
                     )),

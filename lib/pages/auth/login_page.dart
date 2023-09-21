@@ -2,8 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:young_journal/models/login_provider_model.dart';
+import 'package:young_journal/pages/auth/register_page.dart';
 import 'package:young_journal/widgets/basic_button_widget.dart';
-import 'package:young_journal/widgets/basic_container_widget.dart';
+import 'package:young_journal/widgets/fade_textfield_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -52,41 +53,8 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          BasicContainerWidget(
-                            color: const Color(0xfff0c081),
-                              height: 0.1,
-                              child: TextField(
-                                controller: data.eMailController,
-                                cursorColor: Colors.white,
-                                style: const TextStyle(fontSize: 28, color: Colors.white),
-                                decoration: const InputDecoration(
-                                    isCollapsed: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent)
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent)
-                                    )
-                                ),
-                              ),),
-                          BasicContainerWidget(
-                            color: const Color(0xfff0c081),
-                            height: 0.1,
-                            child: TextField(
-                              obscureText: true,
-                              controller: data.passwordController,
-                              cursorColor: Colors.white,
-                              style: const TextStyle(fontSize: 28, color: Colors.white),
-                              decoration: const InputDecoration(
-                                  isCollapsed: true,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.transparent)
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.transparent)
-                                  )
-                              ),
-                            ),),
+                          FadeTextFieldWidget(textEditingController: data.eMailController, hintText: 'Email'),
+                          FadeTextFieldWidget(textEditingController: data.passwordController, hintText: 'Password'),
                         ],
                       ),
                     ),
@@ -97,8 +65,12 @@ class LoginPage extends StatelessWidget {
                         text: 'Sign in'),
                     SizedBox(height: size.height * 0.05,),
                     TextButton(
-                        onPressed: () => data.elderOrKid(context),
-                        child: Text('Register', style: TextStyle(color: Colors.white, fontSize: 34),)),
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const RegisterPage()));
+                        },
+                        child: const Text('Register', style: TextStyle(color: Colors.white, fontSize: 34),)),
                   ],
                 ),
               ),

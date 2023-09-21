@@ -6,6 +6,7 @@ import 'package:young_journal/widgets/fade_container_widget.dart';
 import '../constants.dart';
 import '../functions.dart';
 import '../models/kid_provider_model.dart';
+import '../widgets/fade_textfield_widget.dart';
 import '../widgets/side_button_widget.dart';
 
 class AddTaskPage extends StatelessWidget {
@@ -114,43 +115,13 @@ class AddTaskPage extends StatelessWidget {
                             ],
                           ),),
                       SizedBox(height: size.height * 0.07,),
-                      FadeContainerWidget(
-                        child: TextField(
-                          controller: data.titleController,
-                          cursorColor: Colors.white,
-                          style: const TextStyle(fontSize: 24, color: Colors.white),
-                          decoration: InputDecoration(
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent)
-                            ),
-                            hintText: 'Task',
-                            hintStyle: TextStyle(fontSize: 24, color: Colors.white.withOpacity(0.7))
-                          ),
-                        ),
-                      ),
+                      FadeTextFieldWidget(
+                        textEditingController: data.titleController,
+                        hintText: 'Task',),
                       SizedBox(height: size.height * 0.07,),
-                      FadeContainerWidget(
-                        height: 0.2,
-                        child: TextField(
-                          controller: data.descriptionController,
-                          cursorColor: Colors.white,
-                          maxLines: 4,
-                          style: const TextStyle(fontSize: 24, color: Colors.white),
-                          decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.transparent),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.transparent)
-                              ),
-                              hintText: 'Description',
-                              hintStyle: TextStyle(fontSize: 24, color: Colors.white.withOpacity(0.7))
-                          ),
-                        ),
-                      ),
+                      FadeTextFieldWidget(
+                        textEditingController: data.descriptionController,
+                        hintText: 'Description',),
                       SizedBox(height: size.height * 0.07,),
                       Row(
                         children: [
@@ -185,5 +156,7 @@ class AddTaskPage extends StatelessWidget {
     ));
   }
 }
+
+
 
 
