@@ -9,6 +9,7 @@ import 'models/home_provider_model.dart';
 import 'models/pets_provider_model.dart';
 import 'models/plans_provider_model.dart';
 import 'models/reg_provider_model.dart';
+import 'models/settings_provider_model.dart';
 
 String email = 'denis@gmail.com';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<KidProvider>(create: (_) => KidProvider()),
         ChangeNotifierProvider<PlansProvider>(create: (_) => PlansProvider()),
         ChangeNotifierProvider<PetsProvider>(create: (_) => PetsProvider()),
+        ChangeNotifierProvider<SettingsProvider>(create: (_) => SettingsProvider()),
         ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider()),
         ChangeNotifierProvider<RegProvider>(create: (_) => RegProvider()),
       ],

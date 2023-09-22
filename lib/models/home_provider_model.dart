@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
-import '../pages/custom_page.dart';
+import '../pages/settings_page.dart';
 import '../pages/kid_task_page.dart';
 import '../pages/pets_page.dart';
 import '../pages/plans_page.dart';
@@ -12,7 +12,7 @@ class MainProvider with ChangeNotifier {
     const KidTaskPage(),
     const PlansPage(),
     const PetsPage(),
-    const CustomPage(),
+    const SettingsPage(),
   ];
 
   final List icons = ['hand', 'task', 'pet', 'serves'];

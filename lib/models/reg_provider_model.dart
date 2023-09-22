@@ -29,7 +29,7 @@ class RegProvider with ChangeNotifier {
       'surname': surnameController.text.trim(),
       'relation': relationController.text.trim(),
       'email': eMailController.text.trim(),
-      'kid': elder ? 'n' : 'y',
+      'kid': elder ? 'false' : 'true',
         });
 
   }
